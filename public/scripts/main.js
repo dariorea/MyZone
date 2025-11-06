@@ -53,6 +53,8 @@ const obtenerTendencias = () => {
 	.then(result => result.json())
 	.then(data => {
 		data.results.forEach(item => {
+			const enlace = document.createElement("a")
+			enlace.href
 			const divTrendings = document.createElement("div")
 			divTrendings.classList.add("card")
 			const img = document.createElement("img")
@@ -67,6 +69,19 @@ const obtenerTendencias = () => {
 		console.log("tendencias", data)
 	})
 }
+const scrollContainer = document.getElementById("estrenos");
+const btnLeft = document.querySelector(".scroll-btn.left");
+const btnRight = document.querySelector(".scroll-btn.right");
+
+btnLeft.addEventListener("click", () => {
+	const scrollAmount = scrollContainer.clientWidth; // 👈 ancho visible del contenedor
+	scrollContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+});
+
+btnRight.addEventListener("click", () => {
+	const scrollAmount = scrollContainer.clientWidth; // 👈 igual aquí
+	scrollContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
+});
 obtenerTendencias()
 obtenerPeliculas()
 obtenerSeries()
