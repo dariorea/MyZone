@@ -13,6 +13,7 @@
     width: 300px;
     height: 100vh;
     background-color: black;
+    z-index: 100;
 }
 
 .container-img {
@@ -38,6 +39,11 @@
     align-items: center
     ;
 }
+.scroll-wrapped {
+    position: relative;       /* Para posicionar los botones dentro */
+    width: 100%;
+    display: flex;
+}
 .container-cards {
     width: 100%;
     height: auto;
@@ -46,8 +52,6 @@
     color: white;
     scrollbar-width: none;
     gap: 15px;
-    position: relative;
-    scroll-behavior: smooth;
 }
 .container-cards::-webkit-scrollbar {
     display: none;
@@ -59,7 +63,6 @@
 
 .card {
     height: auto;
-    scroll-behavior: smooth; /* 👈 desplazamiento suave */
 }
 .menu {
     color: white;
@@ -74,7 +77,9 @@
     width: 120px;
 }
 
+
 .scroll-btn {
+    z-index: 100;
     width: 50px;
     height: 50px;
     color: white;
@@ -85,11 +90,11 @@
 }
 .left {
     position: absolute;
-    left: 0;
+    left: 10px;
     top: 40%;
 }
 .right {
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 40%;
 }

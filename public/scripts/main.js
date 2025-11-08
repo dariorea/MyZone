@@ -54,7 +54,7 @@ const obtenerTendencias = () => {
 	.then(data => {
 		data.results.forEach(item => {
 			const enlace = document.createElement("a")
-			enlace.href
+			enlace.href = `${baseUrl}/pages/movie.html?id=${item.id}`
 			const divTrendings = document.createElement("div")
 			divTrendings.classList.add("card")
 			const img = document.createElement("img")
@@ -62,26 +62,34 @@ const obtenerTendencias = () => {
 			img.alt =`${item?.name || item.title}`
 			const name = document.createElement("p")
 			name.textContent = `${item?.name || item.title}`
-			
-			divTrendings.append(img, name)
+
+			enlace.appendChild(img)
+			divTrendings.append(enlace, name)
 			divConteiner.appendChild(divTrendings)
 		})
 		console.log("tendencias", data)
 	})
 }
-const scrollContainer = document.getElementById("estrenos");
-const btnLeft = document.querySelector(".scroll-btn.left");
-const btnRight = document.querySelector(".scroll-btn.right");
+//const scrollContainer = document.getElementById("estrenos");
+//const btnLeft = document.querySelector(".scroll-btn.left");
+//const btnRight = document.querySelector(".scroll-btn.right");
 
-btnLeft.addEventListener("click", () => {
-	const scrollAmount = scrollContainer.clientWidth; // 👈 ancho visible del contenedor
-	scrollContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-});
-
-btnRight.addEventListener("click", () => {
-	const scrollAmount = scrollContainer.clientWidth; // 👈 igual aquí
-	scrollContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
-});
+document.querySelectorAll(".scroll-wrapped").forEach(wrapper => {
+	const scrollContainer = wrapper.querySelector(".container-cards");
+	const btnLeft = wrapper.querySelector(".scroll-btn.left");
+	const btnRight = wrapper.querySelector(".scroll-btn.right");
+  
+	const scrollByAmount = () => scrollContainer.clientWidth;
+  
+	btnLeft.addEventListener("click", () => {
+	  scrollContainer.scrollBy({ left: -scrollByAmount(), behavior: "smooth" });
+	});
+  
+	btnRight.addEventListener("click", () => {
+	  scrollContainer.scrollBy({ left: scrollByAmount(), behavior: "smooth" });
+	});
+  });
+  
 obtenerTendencias()
 obtenerPeliculas()
 obtenerSeries()
