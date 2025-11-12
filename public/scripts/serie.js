@@ -1,13 +1,14 @@
 import { baseUrl } from "./config.js";
 
-const obtenerPeliculaID = () => {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-  const itemContainer = document.querySelector(".item-container");
-  const itemImgContainer = document.getElementById("item-img");
-  const itemInfoContainer = document.getElementById("item-info");
-
-  fetch(`${baseUrl}/request/${id}`)
+baseUrl
+const obtenerSerieID = () => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const itemContainer = document.querySelector(".item-container");
+    const itemImgContainer = document.getElementById("item-img");
+    const itemInfoContainer = document.getElementById("item-info");
+  
+    fetch(`${baseUrl}/request/series/${id}`)
     .then(result => result.json())
     .then(data => {
         console.log(data);
@@ -18,12 +19,12 @@ const obtenerPeliculaID = () => {
 
         const img = document.createElement("img");
         img.src = `https://image.tmdb.org/t/p/original${data.poster_path}`;
-        img.alt = `${data.title}`;
+        img.alt = `${data.name}`;
 
 
-        const year = new Date(data.release_date).getFullYear();
+        const year = new Date(data.first_air_date).getFullYear();
         const title = document.createElement("h1");
-        title.textContent = `${data.title}(${year})`;
+        title.textContent = `${data.name}(${year})`;
 
         const detailContainer = document.createElement("div")
         detailContainer.classList.add("container-detail")
@@ -31,7 +32,7 @@ const obtenerPeliculaID = () => {
         const puntuacion = document.createElement("p")
         puntuacion.textContent = `${data.vote_average.toFixed(1)}★`
         const duracion = document.createElement("p")
-        duracion.textContent = `${data.runtime}min`;
+        duracion.textContent = `${data.number_of_episodes} episodios`;
 
         const overview = document.createElement("em")
         overview.textContent = `${data.overview}`
@@ -52,7 +53,6 @@ const obtenerPeliculaID = () => {
         itemImgContainer.appendChild(img)
         detailContainer.append(puntuacion, duracion)
         itemInfoContainer.append(title, detailContainer, verAhora ,overview, genres, paises)
-    });
-};
-
-obtenerPeliculaID();
+    })
+}
+obtenerSerieID()

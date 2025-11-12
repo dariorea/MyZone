@@ -13,13 +13,16 @@ const obtenerPeliculas = () => {
 		data.results.forEach(item => {
 			const divEstrenos = document.createElement("div")
 			divEstrenos.classList.add("card")
+			const enlace = document.createElement("a")
+			enlace.href = `${baseUrl}/pages/movie.html?id=${item.id}`;
 			const img = document.createElement("img")
 			img.src = `${IMG_BASE}${item.poster_path}`
 			img.alt =`${item.title}`
 			const name = document.createElement("p")
 			name.textContent = `${item.title}`
 
-			divEstrenos.append(img, name)
+			enlace.appendChild(img)
+			divEstrenos.append(enlace, name)
 			divConteiner.appendChild(divEstrenos)
 		});
     })
@@ -34,13 +37,16 @@ const obtenerSeries = () => {
 		data.results.forEach(item => {
 			const divSeries = document.createElement("div")
 			divSeries.classList.add("card")
+			const enlace = document.createElement("a")
+			enlace.href = `${baseUrl}/pages/serie.html?id=${item.id}`;
 			const img = document.createElement("img")
 			img.src = `${IMG_BASE}${item.poster_path}`
 			img.alt =`${item.title}`
 			const name = document.createElement("p")
 			name.textContent = `${item.name}`
 
-			divSeries.append(img, name)
+			enlace.appendChild(img)
+			divSeries.append(enlace, name)
 			divConteiner.appendChild(divSeries)
 		})
 		console.log("series:", data)
@@ -54,7 +60,7 @@ const obtenerTendencias = () => {
 	.then(data => {
 		data.results.forEach(item => {
 			const enlace = document.createElement("a")
-			enlace.href = `${baseUrl}/pages/movie.html?id=${item.id}`
+			item.title ? enlace.href = `${baseUrl}/pages/movie.html?id=${item.id}` : enlace.href = `${baseUrl}/pages/serie.html?id=${item.id}`
 			const divTrendings = document.createElement("div")
 			divTrendings.classList.add("card")
 			const img = document.createElement("img")
