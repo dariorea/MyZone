@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import moviesRouter from "./routes/movies.routes.js";
 import animationRouter from "./routes/animation.routes.js";
+import seriesRouter from "./routes/series.routes.js"
 
 dotenv.config()
 const app = express()
@@ -15,6 +16,7 @@ const PORT = 3000
 
 app.use("/request", moviesRouter)
 app.use("/lost", animationRouter)
+app.use("/gods", seriesRouter)
 
 app.listen(PORT, () => {
     console.log(`Hola desde el puerto: ${PORT}`)

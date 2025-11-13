@@ -1,4 +1,12 @@
 import { baseUrl } from "./config.js";
+import { infiniteScrollLoader, renderCard } from "./modulo.js";
+
+//  infiniteScrollLoader({
+//    containerId: "container",
+//    scrollId: "fin",
+//    endpoint: "request/trendings", // ✅ ruta completa del backend
+//    renderItem: (item, container) => renderCard(item, container, "movie"),
+//  });
 
 document.addEventListener("DOMContentLoaded", () => {
     const divContainer = document.getElementById("container");
@@ -9,19 +17,20 @@ document.addEventListener("DOMContentLoaded", () => {
     let isLoading = false;
     let totalPages = Infinity; // se actualizará cuando lleguen los datos
 
-    const obtenerSeries = async (page = 1) => {
+    const obtenerpelis = async (page = 1) => {
         // Evitar llamadas simultáneas
         if (isLoading || page > totalPages) return;
         isLoading = true;
 
         try {
-            const res = await fetch(`${baseUrl}/gods?page=${page}`);
+            const res = await fetch(`${baseUrl}/request/pelis?page=${page}`);
             if (!res.ok) throw new Error("Error al obtener las series");
             const data = await res.json();
 
             totalPages = data.total_pages || totalPages;
 
             // Renderizar las series
+            console.log(data)
             data.results.forEach(item => {
                 const divSeries = document.createElement("div");
                 divSeries.classList.add("card");
@@ -48,13 +57,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }   
     // Cargar la primera tanda
-    obtenerSeries();
+    obtenerpelis();
 
     // Detectar scroll en el contenedor
     scrollContainer.addEventListener("scroll", () => {
         const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
         if (scrollTop + clientHeight >= scrollHeight - 100) {
-            obtenerSeries(currentPage);
+            obtenerpelis(currentPage);
         }
     });
 });
