@@ -20,20 +20,24 @@
             </div>
             <ul class="menu">
                 <li><a href="../index.html">Inicio</a></li>
-                <li><a href="./buscar.html">Buscar</a></li>
+                <li class="active"><a href="./buscar.html">Buscar</a></li>
                 <li><a href="./allMovies.html">Peliculas</a></li>
-                <li class="active"><a href="./allSeries.html">Series</a></li>
+                <li><a href="./allSeries.html">Series</a></li>
                 <li><a href="./anime.html">Anime</a></li>
                 <li><a href="./kids.html">Kids</a></li>
             </ul>
         </aside>
         <div id="fin" class="container">
             <div class="titulo">
-                <h1>Series</h1>
+                <h1>Buscador</h1>
             </div>
-            <div id="container" class="container-cards"></div>
+            <form class="container-search">
+                <input type="text" id="input-search">
+                <button id="button-search">Buscar</button>
+            </form>
+            <div id="container" class="container-resultados"></div>
         </div>
     </div>
-    <script type="module" src="../scripts/allSerie.js"></script>
+    <script type="module" src="../scripts/search.js"></script>
 </body>
 </html>

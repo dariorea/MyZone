@@ -62,7 +62,7 @@ export function renderCard(item, container, type = "serie") {
   div.classList.add("card");
 
   const enlace = document.createElement("a");
-  enlace.href = `/pages/${type}.html?id=${item.id}`;
+  enlace.href = `${baseUrl}/pages/${type}.html?id=${item.id}`;
 
   const img = document.createElement("img");
   img.src = `${IMG_BASE}${item.poster_path}`;

@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 divSeries.classList.add("card");
 
                 const enlace = document.createElement("a");
-                enlace.href = `/pages/serie.html?id=${item.id}`; // 👈 link del frontend
+                enlace.href = `${baseUrl}/pages/serie.html?id=${item.id}`; // 👈 link del frontend
 
                 const img = document.createElement("img");
                 img.src = `${IMG_BASE}${item.poster_path}`;
